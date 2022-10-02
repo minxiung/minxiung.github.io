@@ -16,23 +16,22 @@
   <meta name="author" content="Xiung">
   <meta name="keywords" content="">
   
-    <meta name="description" content="本地這邊需要安裝 openssh-client伺服器那邊需要安裝 openssh-server 指令從本地傳到遠端$ scp 要傳的檔案 遠端的帳號@遠端的位置(可以是ip，也可以是網址):遠端要傳檔案的資料夾。 1     $  scp FileName &quot;User&quot;@server:server-location&#x2F; &amp;#123;enter&amp;#125;  EX : 以limiu">
+    <meta name="description" content="返回導向程式設計(Return-Oriented Programming)是電腦安全中的一種漏洞利用技術，該技術允許攻擊者在程式啟用了安全保護技術（如堆疊不可執行）的情況下控制程式執行流，執行惡意程式碼。 其核心思想是通過stack overflow等方式控制stack呼叫以劫持程式控制流並執行針對性的機器語言指令序列（稱為Gadgets）。 Gadgets ：以 ret (machine cod">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python3 ssh 傳檔案">
-<meta property="og:url" content="http://example.com/2022/04/05/python3-ssh-%E5%82%B3%E6%AA%94%E6%A1%88/index.html">
+<meta property="og:title" content="ROP">
+<meta property="og:url" content="http://example.com/2021/11/03/ROP/index.html">
 <meta property="og:site_name" content="Xiung&#39;s Blog">
-<meta property="og:description" content="本地這邊需要安裝 openssh-client伺服器那邊需要安裝 openssh-server 指令從本地傳到遠端$ scp 要傳的檔案 遠端的帳號@遠端的位置(可以是ip，也可以是網址):遠端要傳檔案的資料夾。 1     $  scp FileName &quot;User&quot;@server:server-location&#x2F; &amp;#123;enter&amp;#125;  EX : 以limiu">
+<meta property="og:description" content="返回導向程式設計(Return-Oriented Programming)是電腦安全中的一種漏洞利用技術，該技術允許攻擊者在程式啟用了安全保護技術（如堆疊不可執行）的情況下控制程式執行流，執行惡意程式碼。 其核心思想是通過stack overflow等方式控制stack呼叫以劫持程式控制流並執行針對性的機器語言指令序列（稱為Gadgets）。 Gadgets ：以 ret (machine cod">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-04-05T08:55:27.000Z">
-<meta property="article:modified_time" content="2022-10-02T08:14:44.030Z">
+<meta property="article:published_time" content="2021-11-03T05:44:28.000Z">
+<meta property="article:modified_time" content="2022-10-02T09:23:29.082Z">
 <meta property="article:author" content="Xiung">
-<meta property="article:tag" content="python">
-<meta property="article:tag" content="ssh">
+<meta property="article:tag" content="CyberSecurity">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>python3 ssh 傳檔案 - Xiung&#39;s Blog</title>
+  <title>ROP - Xiung&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -197,7 +196,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="python3 ssh 傳檔案"></span>
+            <span id="subtitle" data-typed-text="ROP"></span>
           
         </div>
 
@@ -208,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-04-05 16:55" pubdate>
-          April 5, 2022 pm
+        <time datetime="2021-11-03 13:44" pubdate>
+          November 3, 2021 pm
         </time>
       </span>
     
@@ -220,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          861 words
+          1.1k words
         
       </span>
     
@@ -231,7 +230,7 @@
         
         
         
-          8 mins
+          10 mins
         
       </span>
     
@@ -269,31 +268,55 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">python3 ssh 傳檔案</h1>
+            <h1 style="display: none">ROP</h1>
             
             
               <div class="markdown-body">
                 
-                <p>本地這邊需要安裝 openssh-client<br>伺服器那邊需要安裝 openssh-server</p>
-<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><h3 id="從本地傳到遠端"><a href="#從本地傳到遠端" class="headerlink" title="從本地傳到遠端"></a>從本地傳到遠端</h3><p>$ scp 要傳的檔案 遠端的帳號@遠端的位置(可以是ip，也可以是網址):遠端要傳檔案的資料夾。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">     $  scp FileName <span class="hljs-string">&quot;User&quot;</span>@server:server-location/ &#123;enter&#125;<br></code></pre></td></tr></table></figure>
-
-<p>EX : 以limiu的使用者身份把當前目錄下的*(所有檔案)傳到203.64.125.XX伺服器中的&#x2F;home&#x2F;limiu&#x2F;資料夾位置</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$  scp ./* <span class="hljs-string">&quot;limiu&quot;</span>@203.64.125.XX:/home/limiu/ &#123;enter&#125;<br></code></pre></td></tr></table></figure>
-
-<p>PS : 輸入後如果遠端的帳號有密碼會要求您輸入。<br>User那邊的雙引號可加可不加(如果您的帳號沒有順殊字元的話。</p>
-<h3 id="從遠端傳到本地"><a href="#從遠端傳到本地" class="headerlink" title="從遠端傳到本地"></a>從遠端傳到本地</h3><p>$ scp 遠端的帳號@遠端的位置(可以是ip，也可以是網址):遠端要傳的檔案 傳回來的資料夾位置。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$  scp <span class="hljs-string">&quot;User&quot;</span>@server:server-location/FileName local-location/ &#123;enter&#125;<br></code></pre></td></tr></table></figure>
-
-<p>EX : 以limiu的使用者身份把203.64.125.XX伺服器中的&#x2F;home&#x2F;limiu&#x2F;這個位置下的*(所有東西)下載到本地端的.(當前目錄)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$  scp <span class="hljs-string">&quot;limiu&quot;</span>@203.64.125.XX:/home/limiu/* . &#123;enter&#125;<br></code></pre></td></tr></table></figure>
-
-<p>PS : 輸入後如果遠端的帳號有密碼會要求您輸入。<br>User那邊的雙引號可加可不加(如果您的帳號沒有順殊字元的話。</p>
-<h2 id="P-S"><a href="#P-S" class="headerlink" title="P.S."></a>P.S.</h2><p>如果遠端(伺服器)不是使用預設的Port可以加入 -P 參數。 EX:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$  scp -P 1234 FileName <span class="hljs-string">&quot;User&quot;</span>@server:server-location/ &#123;enter&#125;<br></code></pre></td></tr></table></figure>
-
-
-<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><p><a target="_blank" rel="noopener" href="https://blog.skynimo.com/blog/post/325025436-scp---ssh-%E7%9A%84%E9%81%A0%E7%AB%AF%E6%AA%94%E6%A1%88%E5%82%B3%E8%BC%B8%E6%8C%87%E4%BB%A4">Nimo的成長大海-ssh的遠端檔案傳輸指令</a></p>
+                <h1 id="返回導向程式設計-Return-Oriented-Programming"><a href="#返回導向程式設計-Return-Oriented-Programming" class="headerlink" title="返回導向程式設計(Return-Oriented Programming)"></a>返回導向程式設計(Return-Oriented Programming)</h1><p>是電腦安全中的一種<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Exploit">漏洞利用</a>技術，該技術允許攻擊者在程式啟用了安全保護技術（如<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%B3%87%E6%96%99%E5%9F%B7%E8%A1%8C%E9%98%B2%E6%AD%A2">堆疊不可執行</a>）的情況下控制程式執行流，執行惡意程式碼。</p>
+<p>其核心思想是通過stack overflow等方式控制stack呼叫以劫持程式控制流並執行針對性的機器語言指令序列（稱為<strong>Gadgets</strong>）。</p>
+<p><strong>Gadgets</strong> ：以 <code>ret</code> (machine code: <code>c3</code>)為結尾的指令序列，通過這些指令序列，我們可以修改某些位址的內容，方便控制程式的執行流程。</p>
+<p><code>ret</code> 指令相當於 <code>pop eip</code>。即，首先將 <code>esp</code> 指向的 4 字節内容讀取並assign给 <code>eip</code>，然後 <code>esp</code> 加上 4 字節指向stack的下一个位置。如果當前執行的指令序列仍然以 <code>ret</code> 指令结束，則這個過程將重複， <code>esp</code> 再次增加並且執行下一个指令序列。</p>
+<p>資料防止執行(Data Execution Prevention, <strong>DEP</strong>)</p>
+<p>是一組在<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%9A%8F%E6%9C%BA%E5%AD%98%E5%8F%96%E5%AD%98%E5%82%A8%E5%99%A8">記憶體</a>上執行額外檢查的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%A1%AC%E4%BB%B6">硬體</a>和<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%BD%AF%E4%BB%B6">軟體</a><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%8A%80%E6%9C%AF">技術</a>，有助於防止<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6">惡意程式</a>碼在<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F">系統</a>上執行。</p>
+<h2 id="尋找gadgets"><a href="#尋找gadgets" class="headerlink" title="尋找gadgets"></a>尋找gadgets</h2><ol>
+<li>在program中尋找所有c3(ret)字節。</li>
+<li>向前搜索，看前面的字節是否包含一個有效指令，這裡可以指定最大搜索字節數，以獲得不同長度的gadgets。</li>
+<li>紀錄我們找到的所有有效指令序列。</li>
+</ol>
+<p>理論上我们是可以這樣尋找 gadgets 的，但實際上有很多工具可以完成這個工作，如 ROPgadget，Ropper 等。更完整的搜索可以使用 <a target="_blank" rel="noopener" href="http://ropshell.com/">http://ropshell.com/</a>。</p>
+<h2 id="常用的-gadgets"><a href="#常用的-gadgets" class="headerlink" title="常用的 gadgets"></a><strong>常用的 gadgets</strong></h2><ul>
+<li>保存stack數據到register<ul>
+<li>將stack頂的數據pop並保存到register中，然後跳轉到新的stack位址。所以當返回位址被一個gadgets的位址覆蓋，程序將在返回位址後執行該指令序列。</li>
+<li>如：<code>pop eax; ret</code></li>
+</ul>
+</li>
+<li>保存memory數據到register<ul>
+<li>將memory地址處的數據load到memeory中。</li>
+<li>如：<code>mov ecx,[eax]; ret</code></li>
+</ul>
+</li>
+<li>保存register數據到memory<ul>
+<li>將register的值保存到内存地址處。</li>
+<li>如：<code>mov [eax],ecx; ret</code></li>
+</ul>
+</li>
+<li>算數和邏輯運算<ul>
+<li>add, sub, mul, xor 等。</li>
+<li>如：<code>add eax,ebx; ret</code>, <code>xor edx,edx; ret</code></li>
+</ul>
+</li>
+<li>系統調用<ul>
+<li>執行kernel中斷</li>
+<li>如：<code>int 0x80; ret</code>, <code>call gs:[0x10]; ret</code></li>
+</ul>
+</li>
+<li>會影響stack frame的gadgets<ul>
+<li>這些 gadgets 會改變 ebp 的值，從而影響stack frame，在一些操作如 stack pivot 時我們需要這樣的指令来轉移stack frame。</li>
+<li>如：<code>leave; ret</code>, <code>pop ebp; ret</code></li>
+</ul>
+</li>
+</ul>
 
                 
               </div>
@@ -312,7 +335,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Environment-stuff/" class="category-chain-item">Environment stuff</a>
+  <a href="/categories/Learning-Note/" class="category-chain-item">Learning Note</a>
   
   
 
@@ -327,9 +350,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/python/">#python</a>
-      
-        <a href="/tags/ssh/">#ssh</a>
+        <a href="/tags/CyberSecurity/">#CyberSecurity</a>
       
     </div>
   
@@ -341,8 +362,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>python3 ssh 傳檔案</div>
-      <div>http://example.com/2022/04/05/python3-ssh-傳檔案/</div>
+      <div>ROP</div>
+      <div>http://example.com/2021/11/03/ROP/</div>
     </div>
     <div class="license-meta">
       
@@ -354,7 +375,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>April 5, 2022</div>
+          <div>November 3, 2021</div>
         </div>
       
       
@@ -386,12 +407,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2021/11/07/Algo-DP/" title="Algo-DP">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Algo-DP</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/11/16/Algo-Greedy/" title="Algo-Greedy">
-                        <span class="hidden-mobile">Algo-Greedy</span>
+                      <a href="/2021/08/06/John-The-Ripper/" title="John The Ripper">
+                        <span class="hidden-mobile">John The Ripper</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
