@@ -16,19 +16,23 @@
   <meta name="author" content="Xiung">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="website">
-<meta property="og:title" content="About">
-<meta property="og:url" content="http://example.com/about/index.html">
+    <meta name="description" content="本地這邊需要安裝 openssh-client伺服器那邊需要安裝 openssh-server 指令從本地傳到遠端$ scp 要傳的檔案 遠端的帳號@遠端的位置(可以是ip，也可以是網址):遠端要傳檔案的資料夾。  $  scp FileName &quot;User&quot;@server:server-location&#x2F; &amp;#123;enter&amp;#125;  EX : 以limiu的使用者身">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python3 ssh 傳檔案">
+<meta property="og:url" content="http://example.com/2022/04/05/python3-ssh-%E5%82%B3%E6%AA%94%E6%A1%88/index.html">
 <meta property="og:site_name" content="Xiung&#39;s Blog">
+<meta property="og:description" content="本地這邊需要安裝 openssh-client伺服器那邊需要安裝 openssh-server 指令從本地傳到遠端$ scp 要傳的檔案 遠端的帳號@遠端的位置(可以是ip，也可以是網址):遠端要傳檔案的資料夾。  $  scp FileName &quot;User&quot;@server:server-location&#x2F; &amp;#123;enter&amp;#125;  EX : 以limiu的使用者身">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-10-02T06:21:00.000Z">
-<meta property="article:modified_time" content="2022-10-02T06:22:00.905Z">
+<meta property="article:published_time" content="2022-04-05T08:55:27.000Z">
+<meta property="article:modified_time" content="2022-10-02T07:57:48.860Z">
 <meta property="article:author" content="Xiung">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="ssh">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>About - Xiung&#39;s Blog</title>
+  <title>python3 ssh 傳檔案 - Xiung&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -88,7 +92,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 60vh;">
+<div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -193,9 +197,49 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="About"></span>
+            <span id="subtitle" data-typed-text="python3 ssh 傳檔案"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-05 16:55" pubdate>
+          April 5, 2022 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          856 words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          8 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
 
         
       </div>
@@ -211,61 +255,174 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-            <div class="about-avatar">
-              <img src="/img/xiung-avatar.jpg" srcset="/img/loading.gif" lazyload class="img-fluid" alt="avatar">
-            </div>
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
+      
 
-<div class="text-center">
-  <div class="about-info">
-    <div class="about-name">Xiung</div>
-    <div class="about-intro">I'm Moher Hsiung. A graduate student major in cyber security.<br> This blog is my note for everything I want to record :)</div>
-    <div class="about-icons">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
       
-        
-        
-        
-        <a href=https://github.com/minxiung class="
-           hint--bottom hint--rounded"
-           aria-label=GitHub
-           target="_blank"
-        >
-          <i class="iconfont icon-github-fill" aria-hidden="true"></i>
-          
-        </a>
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">python3 ssh 傳檔案</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>本地這邊需要安裝 openssh-client<br>伺服器那邊需要安裝 openssh-server</p>
+<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><h3 id="從本地傳到遠端"><a href="#從本地傳到遠端" class="headerlink" title="從本地傳到遠端"></a>從本地傳到遠端</h3><p>$ scp 要傳的檔案 遠端的帳號@遠端的位置(可以是ip，也可以是網址):遠端要傳檔案的資料夾。</p>
+<pre><code class="hljs"> $  scp FileName &quot;User&quot;@server:server-location/ &#123;enter&#125;
+</code></pre>
+<p>EX : 以limiu的使用者身份把當前目錄下的*(所有檔案)傳到203.64.125.XX伺服器中的&#x2F;home&#x2F;limiu&#x2F;資料夾位置</p>
+<pre><code class="hljs">$  scp ./* &quot;limiu&quot;@203.64.125.XX:/home/limiu/ &#123;enter&#125;
+</code></pre>
+<p>PS : 輸入後如果遠端的帳號有密碼會要求您輸入。<br>User那邊的雙引號可加可不加(如果您的帳號沒有順殊字元的話。</p>
+<h3 id="從遠端傳到本地"><a href="#從遠端傳到本地" class="headerlink" title="從遠端傳到本地"></a>從遠端傳到本地</h3><p>$ scp 遠端的帳號@遠端的位置(可以是ip，也可以是網址):遠端要傳的檔案 傳回來的資料夾位置。</p>
+<pre><code class="hljs">$  scp &quot;User&quot;@server:server-location/FileName local-location/ &#123;enter&#125;
+</code></pre>
+<p>EX : 以limiu的使用者身份把203.64.125.XX伺服器中的&#x2F;home&#x2F;limiu&#x2F;這個位置下的*(所有東西)下載到本地端的.(當前目錄)</p>
+<pre><code class="hljs">$  scp &quot;limiu&quot;@203.64.125.XX:/home/limiu/* . &#123;enter&#125;
+</code></pre>
+<p>PS : 輸入後如果遠端的帳號有密碼會要求您輸入。<br>User那邊的雙引號可加可不加(如果您的帳號沒有順殊字元的話。</p>
+<h2 id="P-S"><a href="#P-S" class="headerlink" title="P.S."></a>P.S.</h2><p>如果遠端(伺服器)不是使用預設的Port可以加入 -P 參數。 EX:</p>
+<pre><code class="hljs">$  scp -P 1234 FileName &quot;User&quot;@server:server-location/ &#123;enter&#125;
+</code></pre>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><p><a target="_blank" rel="noopener" href="https://blog.skynimo.com/blog/post/325025436-scp---ssh-%E7%9A%84%E9%81%A0%E7%AB%AF%E6%AA%94%E6%A1%88%E5%82%B3%E8%BC%B8%E6%8C%87%E4%BB%A4">Nimo的成長大海-ssh的遠端檔案傳輸指令</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
       
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
         
-        
-        
-        <a href=https://www.linkedin.com/in/shih-min-hsiung-887593132/ class="
-           hint--bottom hint--rounded"
-           aria-label=LinkedIn
-           target="_blank"
-        >
-          <i class="iconfont icon-linkedin-fill" aria-hidden="true"></i>
-          
-        </a>
+  <a href="/categories/Environment-stuff/" class="category-chain-item">Environment stuff</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
       
+        <a href="/tags/python/">#python</a>
+      
+        <a href="/tags/ssh/">#ssh</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>python3 ssh 傳檔案</div>
+      <div>http://example.com/2022/04/05/python3-ssh-傳檔案/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Xiung</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>April 5, 2022</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/10/02/hello-world/" title="Hello World">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Hello World</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
     </div>
   </div>
 </div>
 
-<article class="about-content page-content mt-5">
-  <div class="markdown-body">
-    
-  </div>
-
-  
-</article>
-
 
 
 
@@ -292,11 +449,8 @@
 
 
 
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
+
     
 
     
@@ -389,6 +543,46 @@
   
 
 
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
 
 
   <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>

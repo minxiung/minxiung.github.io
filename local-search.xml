@@ -16,5 +16,32 @@
   
   
   
+  <entry>
+    <title>python3 ssh 傳檔案</title>
+    <link href="/2022/04/05/python3-ssh-%E5%82%B3%E6%AA%94%E6%A1%88/"/>
+    <url>/2022/04/05/python3-ssh-%E5%82%B3%E6%AA%94%E6%A1%88/</url>
+    
+    <content type="html"><![CDATA[<p>本地這邊需要安裝 openssh-client<br>伺服器那邊需要安裝 openssh-server</p><h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><h3 id="從本地傳到遠端"><a href="#從本地傳到遠端" class="headerlink" title="從本地傳到遠端"></a>從本地傳到遠端</h3><p>$ scp 要傳的檔案 遠端的帳號@遠端的位置(可以是ip，也可以是網址):遠端要傳檔案的資料夾。</p><pre><code class="hljs"> $  scp FileName &quot;User&quot;@server:server-location/ &#123;enter&#125;</code></pre><p>EX : 以limiu的使用者身份把當前目錄下的*(所有檔案)傳到203.64.125.XX伺服器中的&#x2F;home&#x2F;limiu&#x2F;資料夾位置</p><pre><code class="hljs">$  scp ./* &quot;limiu&quot;@203.64.125.XX:/home/limiu/ &#123;enter&#125;</code></pre><p>PS : 輸入後如果遠端的帳號有密碼會要求您輸入。<br>User那邊的雙引號可加可不加(如果您的帳號沒有順殊字元的話。</p><h3 id="從遠端傳到本地"><a href="#從遠端傳到本地" class="headerlink" title="從遠端傳到本地"></a>從遠端傳到本地</h3><p>$ scp 遠端的帳號@遠端的位置(可以是ip，也可以是網址):遠端要傳的檔案 傳回來的資料夾位置。</p><pre><code class="hljs">$  scp &quot;User&quot;@server:server-location/FileName local-location/ &#123;enter&#125;</code></pre><p>EX : 以limiu的使用者身份把203.64.125.XX伺服器中的&#x2F;home&#x2F;limiu&#x2F;這個位置下的*(所有東西)下載到本地端的.(當前目錄)</p><pre><code class="hljs">$  scp &quot;limiu&quot;@203.64.125.XX:/home/limiu/* . &#123;enter&#125;</code></pre><p>PS : 輸入後如果遠端的帳號有密碼會要求您輸入。<br>User那邊的雙引號可加可不加(如果您的帳號沒有順殊字元的話。</p><h2 id="P-S"><a href="#P-S" class="headerlink" title="P.S."></a>P.S.</h2><p>如果遠端(伺服器)不是使用預設的Port可以加入 -P 參數。 EX:</p><pre><code class="hljs">$  scp -P 1234 FileName &quot;User&quot;@server:server-location/ &#123;enter&#125;</code></pre><h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><p><a href="https://blog.skynimo.com/blog/post/325025436-scp---ssh-%E7%9A%84%E9%81%A0%E7%AB%AF%E6%AA%94%E6%A1%88%E5%82%B3%E8%BC%B8%E6%8C%87%E4%BB%A4">Nimo的成長大海-ssh的遠端檔案傳輸指令</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Environment stuff</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>python</tag>
+      
+      <tag>ssh</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
   
 </search>
