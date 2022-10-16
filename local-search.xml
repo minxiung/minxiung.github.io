@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>資安檢測服務比較</title>
+    <link href="/2022/10/16/%E8%B3%87%E5%AE%89%E6%AA%A2%E6%B8%AC%E6%9C%8D%E5%8B%99%E6%AF%94%E8%BC%83/"/>
+    <url>/2022/10/16/%E8%B3%87%E5%AE%89%E6%AA%A2%E6%B8%AC%E6%9C%8D%E5%8B%99%E6%AF%94%E8%BC%83/</url>
+    
+    <content type="html"><![CDATA[<p>最近在面試的時候有些題目會讓我們比較幾種資安檢測的方式有甚麼差異，因為我覺得我好像也不是了解得很清楚，所以決定做個筆記紀錄一下。</p><p>下面比較幾個容易混亂的服務: 源碼檢測、弱點掃描、滲透測試、紅隊演練</p><h1 id="源碼檢測"><a href="#源碼檢測" class="headerlink" title="源碼檢測"></a>源碼檢測</h1><p>只有這種方式屬於白箱檢測，會使用自動化工具對程式碼進行靜態分析，找出目標系統的程式弱點。<br>掃描的工具上，付費軟體常見的有<a href="https://www.microfocus.com/zh-tw/products/static-code-analysis-sast/overview">Micro Focus Fortify</a>以及<a href="https://developer.ibm.com/">IBM Security AppScan</a>，而免費工具則有<a href="https://www.sonarqube.org/">SonarQube</a>，PHP&#x2F;Java&#x2F;C#屬於免費的範疇，其他某些語言可以透過購買授權來做使用。</p><p>下面三種就屬於黑箱的部分了，是在沒有提供原始程式碼的情況下去進行檢測:</p><h1 id="弱點掃描"><a href="#弱點掃描" class="headerlink" title="弱點掃描"></a>弱點掃描</h1><p>弱掃主要是透過自動化工具偵測作業系統與軟體系統的已知弱點，可以參考<a href="https://cve.mitre.org/cve/search_cve_list.html">CVE網站</a>去查看各自所使用的一些技術與環境有哪些已知的漏洞，檢查該漏洞是否有被修補，前面提到的兩個付費軟體Fortify和AppScan也都有提供弱點掃描工具，純弱掃的商業軟體有<a href="https://www.rapid7.com/products/nexpose/">Nexpose</a>，而免費軟體有<a href="https://owasp.org/www-project-zap/">ZAP</a>, <a href="https://www.openvas.org/">OpenVAS</a>, <a href="https://zh-tw.tenable.com/products/nessus">Nessus</a>等等。</p><h1 id="滲透測試"><a href="#滲透測試" class="headerlink" title="滲透測試"></a>滲透測試</h1><p>滲透測試和弱掃一樣是去找系統漏洞，差別是他是在指定的時間內，對指定的目標系統，由人(駭客)去嘗試進行入侵、攻破系統，透過駭客的經驗來分析目標的弱點，可以找到一些自動軟體無法發掘之漏洞，甚至破壞掉軟體系統，雖然也有自動化軟體(Fortify,AppScan,Rapid7)，不過多數問題主要還是要由人來找出。</p><h1 id="紅隊演練"><a href="#紅隊演練" class="headerlink" title="紅隊演練"></a>紅隊演練</h1><p>紅隊演練是滲透測試的擴大版，不限定範圍，模擬駭客針對整個組織進行全面入侵演練，某種程度上可以看作是合法的APT攻擊。駭客會透過各種情資與手段進行攻擊，測試目標組織的安全防護體系與響應能力。</p><h1 id="各種服務比較表"><a href="#各種服務比較表" class="headerlink" title="各種服務比較表"></a>各種服務比較表</h1><p><img src="https://i.imgur.com/n9x3cTW.png" alt="比較表"><br>來源：<a href="https://www.chtsecurity.com/service/m108#sec5">中華資安</a></p><h1 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h1><p><a href="https://www.chtsecurity.com/service/m108#sec5">中華資安-紅隊演練服務</a><br><a href="https://www.hcm86.com/%E5%BC%B1%E9%BB%9E%E6%8E%83%E6%8F%8F%E3%80%81%E6%BB%B2%E9%80%8F%E6%8E%83%E6%8F%8F%E8%88%87%E5%8E%9F%E5%A7%8B%E7%A2%BC%E6%8E%83%E6%8F%8F%E6%9C%89%E4%BD%95%E4%B8%8D%E5%90%8C%EF%BC%9F">凡塵文集-弱點掃描、滲透掃描與原始碼掃描有何不同？</a><br><a href="https://blog.csdn.net/qq_41901122/article/details/124886372">CSDN-渗透测试和红队演练有什么区别？</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Learning Note</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>CyberSecurity</tag>
+      
+      <tag>SecurityTesting</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>python3 ssh 傳檔案</title>
     <link href="/2022/04/05/python3-ssh-%E5%82%B3%E6%AA%94%E6%A1%88/"/>
     <url>/2022/04/05/python3-ssh-%E5%82%B3%E6%AA%94%E6%A1%88/</url>

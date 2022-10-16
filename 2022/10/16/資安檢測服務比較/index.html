@@ -16,23 +16,25 @@
   <meta name="author" content="Xiung">
   <meta name="keywords" content="">
   
-    <meta name="description" content="本地這邊需要安裝 openssh-client伺服器那邊需要安裝 openssh-server 指令從本地傳到遠端$ scp 要傳的檔案 遠端的帳號@遠端的位置(可以是ip，也可以是網址):遠端要傳檔案的資料夾。 1     $  scp FileName &quot;User&quot;@server:server-location&#x2F; &amp;#123;enter&amp;#125;  EX : 以limiu">
+    <meta name="description" content="最近在面試的時候有些題目會讓我們比較幾種資安檢測的方式有甚麼差異，因為我覺得我好像也不是了解得很清楚，所以決定做個筆記紀錄一下。 下面比較幾個容易混亂的服務: 源碼檢測、弱點掃描、滲透測試、紅隊演練 源碼檢測只有這種方式屬於白箱檢測，會使用自動化工具對程式碼進行靜態分析，找出目標系統的程式弱點。掃描的工具上，付費軟體常見的有Micro Focus Fortify以及IBM Security App">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python3 ssh 傳檔案">
-<meta property="og:url" content="http://example.com/2022/04/05/python3-ssh-%E5%82%B3%E6%AA%94%E6%A1%88/index.html">
+<meta property="og:title" content="資安檢測服務比較">
+<meta property="og:url" content="http://example.com/2022/10/16/%E8%B3%87%E5%AE%89%E6%AA%A2%E6%B8%AC%E6%9C%8D%E5%8B%99%E6%AF%94%E8%BC%83/index.html">
 <meta property="og:site_name" content="Xiung&#39;s Blog">
-<meta property="og:description" content="本地這邊需要安裝 openssh-client伺服器那邊需要安裝 openssh-server 指令從本地傳到遠端$ scp 要傳的檔案 遠端的帳號@遠端的位置(可以是ip，也可以是網址):遠端要傳檔案的資料夾。 1     $  scp FileName &quot;User&quot;@server:server-location&#x2F; &amp;#123;enter&amp;#125;  EX : 以limiu">
+<meta property="og:description" content="最近在面試的時候有些題目會讓我們比較幾種資安檢測的方式有甚麼差異，因為我覺得我好像也不是了解得很清楚，所以決定做個筆記紀錄一下。 下面比較幾個容易混亂的服務: 源碼檢測、弱點掃描、滲透測試、紅隊演練 源碼檢測只有這種方式屬於白箱檢測，會使用自動化工具對程式碼進行靜態分析，找出目標系統的程式弱點。掃描的工具上，付費軟體常見的有Micro Focus Fortify以及IBM Security App">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-04-05T08:55:27.000Z">
-<meta property="article:modified_time" content="2022-10-02T08:14:44.030Z">
+<meta property="og:image" content="https://i.imgur.com/n9x3cTW.png">
+<meta property="article:published_time" content="2022-10-16T09:03:11.000Z">
+<meta property="article:modified_time" content="2022-10-16T13:30:38.579Z">
 <meta property="article:author" content="Xiung">
-<meta property="article:tag" content="python">
-<meta property="article:tag" content="ssh">
+<meta property="article:tag" content="CyberSecurity">
+<meta property="article:tag" content="SecurityTesting">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://i.imgur.com/n9x3cTW.png">
   
   
   
-  <title>python3 ssh 傳檔案 - Xiung&#39;s Blog</title>
+  <title>資安檢測服務比較 - Xiung&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -197,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="python3 ssh 傳檔案"></span>
+            <span id="subtitle" data-typed-text="資安檢測服務比較"></span>
           
         </div>
 
@@ -208,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-04-05 16:55" pubdate>
-          April 5, 2022 pm
+        <time datetime="2022-10-16 17:03" pubdate>
+          October 16, 2022 pm
         </time>
       </span>
     
@@ -220,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          861 words
+          788 words
         
       </span>
     
@@ -231,7 +233,7 @@
         
         
         
-          8 mins
+          7 mins
         
       </span>
     
@@ -269,31 +271,20 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">python3 ssh 傳檔案</h1>
+            <h1 style="display: none">資安檢測服務比較</h1>
             
             
               <div class="markdown-body">
                 
-                <p>本地這邊需要安裝 openssh-client<br>伺服器那邊需要安裝 openssh-server</p>
-<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><h3 id="從本地傳到遠端"><a href="#從本地傳到遠端" class="headerlink" title="從本地傳到遠端"></a>從本地傳到遠端</h3><p>$ scp 要傳的檔案 遠端的帳號@遠端的位置(可以是ip，也可以是網址):遠端要傳檔案的資料夾。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">     $  scp FileName <span class="hljs-string">&quot;User&quot;</span>@server:server-location/ &#123;enter&#125;<br></code></pre></td></tr></table></figure>
-
-<p>EX : 以limiu的使用者身份把當前目錄下的*(所有檔案)傳到203.64.125.XX伺服器中的&#x2F;home&#x2F;limiu&#x2F;資料夾位置</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$  scp ./* <span class="hljs-string">&quot;limiu&quot;</span>@203.64.125.XX:/home/limiu/ &#123;enter&#125;<br></code></pre></td></tr></table></figure>
-
-<p>PS : 輸入後如果遠端的帳號有密碼會要求您輸入。<br>User那邊的雙引號可加可不加(如果您的帳號沒有順殊字元的話。</p>
-<h3 id="從遠端傳到本地"><a href="#從遠端傳到本地" class="headerlink" title="從遠端傳到本地"></a>從遠端傳到本地</h3><p>$ scp 遠端的帳號@遠端的位置(可以是ip，也可以是網址):遠端要傳的檔案 傳回來的資料夾位置。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$  scp <span class="hljs-string">&quot;User&quot;</span>@server:server-location/FileName local-location/ &#123;enter&#125;<br></code></pre></td></tr></table></figure>
-
-<p>EX : 以limiu的使用者身份把203.64.125.XX伺服器中的&#x2F;home&#x2F;limiu&#x2F;這個位置下的*(所有東西)下載到本地端的.(當前目錄)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$  scp <span class="hljs-string">&quot;limiu&quot;</span>@203.64.125.XX:/home/limiu/* . &#123;enter&#125;<br></code></pre></td></tr></table></figure>
-
-<p>PS : 輸入後如果遠端的帳號有密碼會要求您輸入。<br>User那邊的雙引號可加可不加(如果您的帳號沒有順殊字元的話。</p>
-<h2 id="P-S"><a href="#P-S" class="headerlink" title="P.S."></a>P.S.</h2><p>如果遠端(伺服器)不是使用預設的Port可以加入 -P 參數。 EX:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$  scp -P 1234 FileName <span class="hljs-string">&quot;User&quot;</span>@server:server-location/ &#123;enter&#125;<br></code></pre></td></tr></table></figure>
-
-
-<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><p><a target="_blank" rel="noopener" href="https://blog.skynimo.com/blog/post/325025436-scp---ssh-%E7%9A%84%E9%81%A0%E7%AB%AF%E6%AA%94%E6%A1%88%E5%82%B3%E8%BC%B8%E6%8C%87%E4%BB%A4">Nimo的成長大海-ssh的遠端檔案傳輸指令</a></p>
+                <p>最近在面試的時候有些題目會讓我們比較幾種資安檢測的方式有甚麼差異，因為我覺得我好像也不是了解得很清楚，所以決定做個筆記紀錄一下。</p>
+<p>下面比較幾個容易混亂的服務: 源碼檢測、弱點掃描、滲透測試、紅隊演練</p>
+<h1 id="源碼檢測"><a href="#源碼檢測" class="headerlink" title="源碼檢測"></a>源碼檢測</h1><p>只有這種方式屬於白箱檢測，會使用自動化工具對程式碼進行靜態分析，找出目標系統的程式弱點。<br>掃描的工具上，付費軟體常見的有<a target="_blank" rel="noopener" href="https://www.microfocus.com/zh-tw/products/static-code-analysis-sast/overview">Micro Focus Fortify</a>以及<a target="_blank" rel="noopener" href="https://developer.ibm.com/">IBM Security AppScan</a>，而免費工具則有<a target="_blank" rel="noopener" href="https://www.sonarqube.org/">SonarQube</a>，PHP&#x2F;Java&#x2F;C#屬於免費的範疇，其他某些語言可以透過購買授權來做使用。</p>
+<p>下面三種就屬於黑箱的部分了，是在沒有提供原始程式碼的情況下去進行檢測:</p>
+<h1 id="弱點掃描"><a href="#弱點掃描" class="headerlink" title="弱點掃描"></a>弱點掃描</h1><p>弱掃主要是透過自動化工具偵測作業系統與軟體系統的已知弱點，可以參考<a target="_blank" rel="noopener" href="https://cve.mitre.org/cve/search_cve_list.html">CVE網站</a>去查看各自所使用的一些技術與環境有哪些已知的漏洞，檢查該漏洞是否有被修補，前面提到的兩個付費軟體Fortify和AppScan也都有提供弱點掃描工具，純弱掃的商業軟體有<a target="_blank" rel="noopener" href="https://www.rapid7.com/products/nexpose/">Nexpose</a>，而免費軟體有<a target="_blank" rel="noopener" href="https://owasp.org/www-project-zap/">ZAP</a>, <a target="_blank" rel="noopener" href="https://www.openvas.org/">OpenVAS</a>, <a target="_blank" rel="noopener" href="https://zh-tw.tenable.com/products/nessus">Nessus</a>等等。</p>
+<h1 id="滲透測試"><a href="#滲透測試" class="headerlink" title="滲透測試"></a>滲透測試</h1><p>滲透測試和弱掃一樣是去找系統漏洞，差別是他是在指定的時間內，對指定的目標系統，由人(駭客)去嘗試進行入侵、攻破系統，透過駭客的經驗來分析目標的弱點，可以找到一些自動軟體無法發掘之漏洞，甚至破壞掉軟體系統，雖然也有自動化軟體(Fortify,AppScan,Rapid7)，不過多數問題主要還是要由人來找出。</p>
+<h1 id="紅隊演練"><a href="#紅隊演練" class="headerlink" title="紅隊演練"></a>紅隊演練</h1><p>紅隊演練是滲透測試的擴大版，不限定範圍，模擬駭客針對整個組織進行全面入侵演練，某種程度上可以看作是合法的APT攻擊。駭客會透過各種情資與手段進行攻擊，測試目標組織的安全防護體系與響應能力。</p>
+<h1 id="各種服務比較表"><a href="#各種服務比較表" class="headerlink" title="各種服務比較表"></a>各種服務比較表</h1><p><img src="https://i.imgur.com/n9x3cTW.png" srcset="/img/loading.gif" lazyload alt="比較表"><br>來源：<a target="_blank" rel="noopener" href="https://www.chtsecurity.com/service/m108#sec5">中華資安</a></p>
+<h1 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h1><p><a target="_blank" rel="noopener" href="https://www.chtsecurity.com/service/m108#sec5">中華資安-紅隊演練服務</a><br><a target="_blank" rel="noopener" href="https://www.hcm86.com/%E5%BC%B1%E9%BB%9E%E6%8E%83%E6%8F%8F%E3%80%81%E6%BB%B2%E9%80%8F%E6%8E%83%E6%8F%8F%E8%88%87%E5%8E%9F%E5%A7%8B%E7%A2%BC%E6%8E%83%E6%8F%8F%E6%9C%89%E4%BD%95%E4%B8%8D%E5%90%8C%EF%BC%9F">凡塵文集-弱點掃描、滲透掃描與原始碼掃描有何不同？</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41901122/article/details/124886372">CSDN-渗透测试和红队演练有什么区别？</a></p>
 
                 
               </div>
@@ -312,7 +303,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Environment-stuff/" class="category-chain-item">Environment stuff</a>
+  <a href="/categories/Learning-Note/" class="category-chain-item">Learning Note</a>
   
   
 
@@ -327,9 +318,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/python/">#python</a>
+        <a href="/tags/CyberSecurity/">#CyberSecurity</a>
       
-        <a href="/tags/ssh/">#ssh</a>
+        <a href="/tags/SecurityTesting/">#SecurityTesting</a>
       
     </div>
   
@@ -341,8 +332,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>python3 ssh 傳檔案</div>
-      <div>http://example.com/2022/04/05/python3-ssh-傳檔案/</div>
+      <div>資安檢測服務比較</div>
+      <div>http://example.com/2022/10/16/資安檢測服務比較/</div>
     </div>
     <div class="license-meta">
       
@@ -354,7 +345,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>April 5, 2022</div>
+          <div>October 16, 2022</div>
         </div>
       
       
@@ -386,18 +377,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/10/16/%E8%B3%87%E5%AE%89%E6%AA%A2%E6%B8%AC%E6%9C%8D%E5%8B%99%E6%AF%94%E8%BC%83/" title="資安檢測服務比較">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">資安檢測服務比較</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/01/12/Writeup-split/" title="Writeup-split">
-                        <span class="hidden-mobile">Writeup-split</span>
+                      <a href="/2022/04/05/python3-ssh-%E5%82%B3%E6%AA%94%E6%A1%88/" title="python3 ssh 傳檔案">
+                        <span class="hidden-mobile">python3 ssh 傳檔案</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
